@@ -1,1 +1,23 @@
 // _variables
+// colors
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+
+
+// button colors
+
+$btn-number-bg:           $gray-dark;
+$btn-delete-bg:           #d9534f;
+$btn-operator-bg:         $gray-light;
+$btn-function-bg:         #31da95;
+
+
+// text colors
+
+$text-color-light:        $gray-lighter;
+$text-color-dark:         $gray-darker;
