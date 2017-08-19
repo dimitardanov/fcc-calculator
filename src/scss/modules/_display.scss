@@ -28,3 +28,20 @@
 #res {
   @include display(50px, 1.3em);
 }
+
+#cursor {
+  animation-name: cursorblink;
+  animation-duration: 0.75s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-out;
+}
+
+@keyframes cursorblink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
