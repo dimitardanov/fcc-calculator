@@ -1,14 +1,30 @@
 
 .display {
-  height: 120px;
   display: flex;
   flex-flow: column;
+  border-top: 1px solid $gray-dark;
+  border-bottom: 1px solid $gray-dark;
+
+  p {
+    margin: 0;
+    padding: 0 5px;
+    text-align: right;
+    color: $gray-dark;
+  }
+}
+
+
+@mixin display($height, $font-size) {
+  height: $height;
+  font-size: $font-size;
+  line-height: $height;
 }
 
 #expr {
-  flex-basis: 66%;
+  @include display(70px, 1.2em);
+  border-bottom: 1px solid $gray-dark;
 }
 
 #res {
-  flex-basis: 33%;
+  @include display(50px, 1.3em);
 }
