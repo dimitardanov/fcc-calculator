@@ -1,1 +1,48 @@
 // _mixins
+
+@mixin last-grid-row($columns) {
+    &:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}),
+    &:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}) ~ button {
+        @content;
+    }
+}
+
+@mixin button($bg-color, $color) {
+  background-color: $bg-color;
+  color: $color;
+  outline: none;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 25%;
+  height: 50px;
+  border: none;
+  padding: 0;
+
+  &:hover {
+    background-color: lighten($bg-color, 15%);
+  }
+
+  &:active {
+    background-color: darken($bg-color, 10%);
+  }
+
+  transition: 0.05s;
+}
+
+@mixin button-light-text($bg-color, $color) {
+
+  @include button($bg-color, $color);
+
+  &:hover, &:active {
+    color: lighten($color, 15%);
+  }
+}
+
+@mixin button-dark-text($bg-color, $color) {
+
+  @include button($bg-color, $color);
+
+  &:hover, &:active {
+    color: darken($color, 10%);
+  }
+}
