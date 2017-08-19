@@ -1,0 +1,30 @@
+
+
+.numpad button {
+  border-left: 1px solid $text-color-dark;
+  border-bottom: 1px solid $text-color-dark;
+
+  &:nth-child(4n+1) {
+    border-left: none;
+  }
+
+  @include last-grid-row(4) {
+    border-bottom: none;
+  }
+}
+
+.number {
+  @include button-light-text($btn-number-bg, $text-color-light);
+}
+
+.del {
+  @include button-light-text($btn-delete-bg, $text-color-light);
+}
+
+.operator {
+  @include button-dark-text($btn-operator-bg, $text-color-dark);
+}
+
+.function {
+  @include button-dark-text($btn-function-bg, $text-color-dark);
+}
