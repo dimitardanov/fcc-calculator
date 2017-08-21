@@ -11,5 +11,5 @@
 .calc {
   width: 320px;
   border: 1px solid $gray-dark;
-  box-shadow: 0 0 10px $gray-dark;
+  box-shadow: 0 0 100px $gray-light, 0 0 10px -5px $gray-dark;
 }
