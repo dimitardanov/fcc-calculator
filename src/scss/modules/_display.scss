@@ -31,6 +31,13 @@
 }
 
 #cursor {
+  display: inline-block;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 1.2em;
+  width: 0.05em;
+  background-color: $text-cursor-color;
   animation-name: cursorblink;
   animation-duration: 0.75s;
   animation-iteration-count: infinite;
