@@ -14,14 +14,13 @@ function reverseKeyValuePairs(obj) {
 }
 
 function exprReplacer(str, replaceObj) {
-  // TODO: Come up with a more elegant and robust solution
+  var specialChars = /^[\+\-\*\/\(\)\.]/;
   Object.keys(replaceObj).forEach(function(key) {
-    if (key.match(/[a-z0-9]/)) {
-      var regex = new RegExp(key, 'g');
-    } else {
-      var regex = new RegExp('\\' + key, 'g');
+    var regExStr = key;
+    if (specialChars.test(key)) {
+      var regExStr = '\\' + regExStr;
     }
-    str = str.replace(regex, replaceObj[key]);
+    str = str.replace(new RegExp(regExStr, 'g'), replaceObj[key]);
   });
   return str;
 }

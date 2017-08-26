@@ -18,9 +18,17 @@ describe('exprReplacer function', function() {
   before(function() {
     this.substObj = {
       'a': 'z',
-      'b': 'y'
+      'b': 'y',
+      '+': 'add',
+      '-': 'subtract',
+      '*': 'multiply',
+      '/': 'divide',
+      '(': 'lBracket',
+      ')': 'rBracket',
+      '.': 'dot',
+      '=': 'equal'
     };
-    this.str = 'a1';
+    this.str = '1avf';
   });
 
   after(function() {
@@ -28,7 +36,13 @@ describe('exprReplacer function', function() {
     delete this.str;
   });
 
-  it('should replace a single character in a given string', function() {
-    expect(replacer(this.str, this.substObj)).to.equal('z1');
+  it('should replace a non-special character', function() {
+    expect(replacer(this.str, this.substObj)).to.equal('1zvf');
+  });
+
+  it('should replace special characters', function() {
+    expect(replacer('24+56-78*14/90(34)56.43=2dfg123', this.substObj)).to.equal(
+      '24add56subtract78multiply14divide90lBracket34rBracket56dot43equal2dfg123'
+    );
   });
 });
