@@ -213,3 +213,13 @@ describe('addParenthesis function', function() {
     }).to.throw();
   });
 });
+
+describe('replaceExprWithResult function', function() {
+  it('should return an expression with the result as left hand side',
+    function() {
+      expect(e.replaceExprWithResult('34', '((34-43)+21', ')')).to.deep.equal(
+        {'left': '34', 'right': ''}
+      );
+    }
+  );
+});
