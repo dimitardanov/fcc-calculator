@@ -1,9 +1,15 @@
+var checks = require('./checks.js');
+var matchLastNumber = require('../helpers/helpers.js').matchLastNumber;
 
 function addDigitToExpression(digit, left, right) {
-  return {
-    'left': left + digit,
-    'right': right
-  };
+  if (checks.isValidNumber(left, digit)) {
+    return {
+      'left': left + digit,
+      'right': right
+    };
+  } else {
+    throw new Error('Invalid number: ', matchLastNumber(left)[0] + digit);
+  }
 }
 
 function deleteLastChar(left, right) {
