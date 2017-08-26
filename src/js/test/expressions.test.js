@@ -75,3 +75,9 @@ describe('deleteLastChar function', function() {
     );
   });
 });
+
+describe('resetExpression function', function() {
+  it('should return an empty expression', function() {
+    expect(e.resetExpression()).to.deep.equal({'left': '', 'right': ''});
+  });
+});
