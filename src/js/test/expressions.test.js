@@ -81,3 +81,53 @@ describe('resetExpression function', function() {
     expect(e.resetExpression()).to.deep.equal({'left': '', 'right': ''});
   });
 });
+
+describe('addOperator function', function() {
+  it('should add a "-" or "+" at the beginning of an empty expr',
+    function() {
+      expect(e.addOperator('+', '', '')).to.deep.equal(
+        {'left': '+', 'right': ''}
+      );
+      expect(e.addOperator('-', '', '')).to.deep.equal(
+        {'left': '-', 'right': ''}
+      );
+    }
+  );
+
+  it('should ignore "*" and "/" at the beginning of an empty expr',
+    function() {
+      expect(e.addOperator('*', '', '')).to.deep.equal(
+        {'left': '', 'right': ''}
+      );
+      expect(e.addOperator('/', '', '')).to.deep.equal(
+        {'left': '', 'right': ''}
+      );
+    }
+  );
+
+  it('should add an operator at the end of left hand expr', function() {
+    expect(e.addOperator('*', '(45+23', ')')).to.deep.equal(
+      {'left': '(45+23*', 'right': ')'}
+    );
+    expect(e.addOperator('/', '(23+67)', '')).to.deep.equal(
+      {'left': '(23+67)/', 'right': ''}
+    );
+  });
+
+  it('should replace an operator if last char of left exp is an operator',
+    function() {
+      expect(e.addOperator('*', '45+', '')).to.deep.equal(
+        {'left': '45*', 'right': ''}
+      );
+      expect(e.addOperator('-', '23+43*', '')).to.deep.equal(
+        {'left': '23+43-', 'right': ''}
+      );
+      expect(e.addOperator('+', '34+24-', '')).to.deep.equal(
+        {'left': '34+24+', 'right': ''}
+      );
+      expect(e.addOperator('/', '89-23*', '')).to.deep.equal(
+        {'left': '89-23/', 'right': ''}
+      );
+    }
+  );
+});
