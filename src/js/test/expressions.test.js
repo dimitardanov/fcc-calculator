@@ -131,3 +131,85 @@ describe('addOperator function', function() {
     }
   );
 });
+
+describe('addParenthesis function', function() {
+  it('should add "(" to the left and ")" to the right for empty expr',
+    function() {
+      expect(e.addParenthesis('(', '', '')).to.deep.equal(
+        {'left': '(', 'right': ')'}
+      );
+    }
+  );
+
+  it('should add "(" to the left and ")" to the right after an operator',
+    function() {
+      expect(e.addParenthesis('(', '34+', '')).to.deep.equal(
+        {'left': '34+(', 'right': ')'}
+      );
+      expect(e.addParenthesis('(', '23*', '')).to.deep.equal(
+        {'left': '23*(', 'right': ')'}
+      );
+      expect(e.addParenthesis('(', '45/', '')).to.deep.equal(
+        {'left': '45/(', 'right': ')'}
+      );
+      expect(e.addParenthesis('(', '-', '')).to.deep.equal(
+        {'left': '-(', 'right': ')'}
+      );
+    }
+  );
+
+  it('should allow nesting of parentheses', function() {
+    expect(e.addParenthesis('(', '(34+', ')')).to.deep.equal(
+      {'left': '(34+(', 'right': '))'}
+    );
+    expect(e.addParenthesis('(', '23+((', '))')).to.deep.equal(
+      {'left': '23+(((', 'right': ')))'}
+    );
+  });
+
+  it('should move ")" to the left if left expr ends with a number',
+    function() {
+      expect(e.addParenthesis(')', '(3*(23+4', '))')).to.deep.equal(
+        {'left': '(3*(23+4)', 'right': ')'}
+      );
+    }
+  );
+
+  it('should move ")" to the left if left expr ends with ")"', function() {
+    expect(e.addParenthesis(')', '(23/(45-3)', ')')).to.deep.equal(
+      {'left': '(23/(45-3))', 'right': ''}
+    );
+  });
+
+  it('should throw error if adding ")" to empty expr', function() {
+    expect(function() {
+      e.addParenthesis(')', '', '');
+    }).to.throw();
+  });
+
+  it('should throw error if trying to add unmatched ")"', function() {
+    expect(function() {
+      e.addParenthesis(')', '23*(43-2)+5', '');
+    }).to.throw();
+  });
+
+  it('should throw error if adding ")" after an operator', function() {
+    expect(function() {
+      e.addParenthesis(')', '(34+', ')');
+    }).to.throw();
+  });
+
+  it('should throw error if adding ")" after a "." without a surrounding digit',
+    function() {
+      expect(function() {
+        e.addParenthesis(')', '(43+.', ')');
+      }).to.throw();
+    }
+  );
+
+  it('should throw error if adding "(" after a number', function() {
+    expect(function() {
+      e.addParenthesis('(', '24+34', '');
+    }).to.throw();
+  });
+});
