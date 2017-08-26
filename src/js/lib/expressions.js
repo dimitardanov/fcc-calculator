@@ -52,11 +52,21 @@ function addOperator(operator, left, right) {
 
 function addParenthesis(paren, left, right) {
   if (paren == '(') {
-    left += paren;
-    right = ')' + right;
+    if (left.length == 0 || /[\+\-\*\/\(]$/.test(left)) {
+      left = left + '(';
+      right = ')' + right;
+    } else {
+      throw new Error('Invalid expression');
+    }
+  } else if (paren == ')') {
+    if (right[0] == ')' && /(\))|(\d+\.)|(\d+)$/.test(left)) {
+      left += right[0];
+      right = right.slice(1);
+    } else {
+      throw new Error('Invalid expression');
+    }
   } else {
-    left += right[0] || '';
-    right = right.slice(1);
+    throw new Error('Invalid expression');
   }
   return {
     'left': left,
