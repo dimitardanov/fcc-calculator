@@ -1,5 +1,6 @@
 var revObj = require('../helpers/helpers.js').reverseKeyValuePairs;
 var replacer = require('../helpers/helpers.js').exprReplacer;
+var matchLastNumber = require('../helpers/helpers.js').matchLastNumber;
 var expect = require('chai').expect;
 
 describe('reverseKeyValuePairs function', function() {
@@ -44,5 +45,35 @@ describe('exprReplacer function', function() {
     expect(replacer('24+56-78*14/90(34)56.43=2dfg123', this.substObj)).to.equal(
       '24add56subtract78multiply14divide90lBracket34rBracket56dot43equal2dfg123'
     );
+  });
+});
+
+describe('matchLastNumber function', function() {
+  it('should return empty match if last chars are not numbers or a dot',
+    function() {
+    expect(matchLastNumber('23+9-')[0]).to.be.empty;
+    expect(matchLastNumber('23+9)')[0]).to.be.empty;
+    expect(matchLastNumber('23+9/')[0]).to.be.empty;
+    expect(matchLastNumber('')[0]).to.be.empty;
+  });
+
+  it('should return "." from "34+."', function() {
+    expect(matchLastNumber('34+.')[0]).to.equal('.');
+  });
+
+  it('should return last number if it is an integer', function() {
+    expect(matchLastNumber('(45+9)*23')[0]).to.equal('23');
+  });
+
+  it('should return last number if it starts with decimal point', function() {
+    expect(matchLastNumber('(45+9)-.34')[0]).to.equal('.34');
+  });
+
+  it('should return last number if it ends with decimal point', function() {
+    expect(matchLastNumber('(45+9)*23.')[0]).to.equal('23.');
+  });
+
+  it('should return last number if it is a decimal number', function() {
+    expect(matchLastNumber('(45+9)+0.3')[0]).to.equal('0.3');
   });
 });

@@ -25,8 +25,14 @@ function exprReplacer(str, replaceObj) {
   return str;
 }
 
+function matchLastNumber(expr) {
+  var regex = /(\d*\.?\d*)$/;
+  return expr.match(regex);
+}
+
 module.exports = {
   createActionObj: createActionObj,
   reverseKeyValuePairs: reverseKeyValuePairs,
-  exprReplacer: exprReplacer
+  exprReplacer: exprReplacer,
+  matchLastNumber: matchLastNumber
 };
