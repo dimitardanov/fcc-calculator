@@ -39,7 +39,9 @@ function resetExpression() {
 }
 
 function addOperator(operator, left, right) {
-  if (/[\+\-\*\/]$/.test(left)) {
+  if (left.length == 0 && /[\*\/]/.test(operator)) {
+    operator = '';
+  } else if (/[\+\-\*\/]$/.test(left)) {
     left = left.slice(0, -1);
   }
   return {
