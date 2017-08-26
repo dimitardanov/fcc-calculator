@@ -16,6 +16,9 @@ function deleteLastChar(left, right) {
   } else if (left[left.length - 1] == '(') {
     expr.left = left.slice(0, -1);
     expr.right = right.slice(1);
+  } else if (left[left.length - 1] == ')') {
+    expr.left = left.slice(0, -1);
+    expr.right = ')' + expr.right;
   } else {
     expr.left = left.slice(0, -1);
   }
