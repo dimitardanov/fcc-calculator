@@ -172,12 +172,18 @@ describe('addParenthesis function', function() {
       expect(e.addParenthesis(')', '(3*(23+4', '))')).to.deep.equal(
         {'left': '(3*(23+4)', 'right': ')'}
       );
+      expect(e.addParenthesis(')', '(3*(23-4.', '))')).to.deep.equal(
+        {'left': '(3*(23-4.)', 'right': ')'}
+      );
+      expect(e.addParenthesis(')', '(3*(23+.4', '))')).to.deep.equal(
+        {'left': '(3*(23+.4)', 'right': ')'}
+      );
     }
   );
 
   it('should move ")" to the left if left expr ends with ")"', function() {
-    expect(e.addParenthesis(')', '(23/(45-3)', ')')).to.deep.equal(
-      {'left': '(23/(45-3))', 'right': ''}
+    expect(e.addParenthesis(')', '((23)/(45-3)', ')')).to.deep.equal(
+      {'left': '((23)/(45-3))', 'right': ''}
     );
   });
 
