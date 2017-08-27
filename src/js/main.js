@@ -35,7 +35,12 @@ keysHTML.addEventListener('click', function(event) {
   }
   result = expr.evaluateExpr(result, expression.left, expression.right);
   render.result(resultHTML, result.value);
-  console.log(expression);
+  if (result.updated) {
+    resultHTML.className = '';
+  } else {
+    resultHTML.className = 'stale';
+  }
+  console.log('expression: ', expression, 'result: ', result);
 });
 
 function createExpression(act, exprLeft, exprRight) {
