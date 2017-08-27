@@ -217,13 +217,20 @@ describe('addParenthesis function', function() {
 });
 
 describe('replaceExprWithResult function', function() {
-  it('should return an expression with the result as left hand side',
+  it('should return an expr with the result as left hand side if updated',
     function() {
-      expect(e.replaceExprWithResult('34', '((34-43)+21', ')')).to.deep.equal(
+      var res = {'value': '34', 'updated': true};
+      expect(e.replaceExprWithResult(res, '((34-43)+21', ')')).to.deep.equal(
         {'left': '34', 'right': ''}
       );
     }
   );
+
+  it('should throw error if result is not updated', function() {
+    var res = {'value': '44', 'updated': false};
+    expect(
+      function() {e.replaceExprWithResult(res, '((23-26)*4', ')');}).to.throw();
+  });
 });
 
 describe('addDecimal function', function() {

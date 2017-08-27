@@ -75,10 +75,14 @@ function addParenthesis(paren, left, right) {
 }
 
 function replaceExprWithResult(result, left, right) {
-  return {
-    'left': String(result),
-    'right': ''
-  };
+  if (!result.updated) {
+    throw new Error('Result out of date');
+  } else {
+    return {
+      'left': String(result.value),
+      'right': ''
+    };
+  }
 }
 
 function addDecimal(left, right) {
