@@ -223,3 +223,44 @@ describe('replaceExprWithResult function', function() {
     }
   );
 });
+
+describe('addDecimal function', function() {
+  it('should add "." at the end of left side of empty expr', function() {
+    expect(e.addDecimal('', '')).to.deep.equal({'left': '.', 'right': ''});
+  });
+
+  it('should add "." to the left if ends in operator', function() {
+    expect(e.addDecimal('4+', '')).to.deep.equal({'left': '4+.', 'right': ''});
+  });
+
+  it('should add "." to the left if ends with number without decimal',
+    function() {
+      expect(e.addDecimal('((34)+2345', ')')).to.deep.equal(
+        {'left': '((34)+2345.', 'right': ')'}
+      );
+    }
+  );
+
+  it('should add "." to the left if ends with "("', function() {
+    expect(e.addDecimal('45+(', ')')).to.deep.equal(
+      {'left': '45+(.', 'right': ')'}
+    );
+  });
+
+  it('should throw error if left ends with a ")"', function() {
+    expect(
+      function() {
+        e.addDecimal('(23+34)', '');
+      }
+    ).to.throw();
+  });
+
+  it('should throw error if left ends with a number containing a decimal',
+    function() {
+      expect(function() {e.addDecimal('23+34.45', '');}).to.throw();
+      expect(function() {e.addDecimal('23+23.', '');}).to.throw();
+      expect(function() {e.addDecimal('23+.34', '');}).to.throw();
+      expect(function() {e.addDecimal('23+.', '');}).to.throw();
+    }
+  );
+});
