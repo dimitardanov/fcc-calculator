@@ -9,7 +9,10 @@ var expression = {
   'right': ''
 };
 
-var result = 0;
+var result = {
+  'value': 0,
+  'updated': true
+};
 
 var keysHTML = document.querySelector('.numpad');
 var exprLeftHTML = document.querySelector('#left');
@@ -23,7 +26,7 @@ keysHTML.addEventListener('click', function(event) {
   expression = createExpression(act, expression.left, expression.right);
   render.expression(exprLeftHTML, exprRightHTML, expression);
   result = expr.evaluateExpr(result, expression.left, expression.right);
-  render.result(resultHTML, result);
+  render.result(resultHTML, result.value);
   console.log(expression);
 });
 

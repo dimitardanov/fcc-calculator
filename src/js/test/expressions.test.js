@@ -272,13 +272,17 @@ describe('addDecimal function', function() {
 });
 
 describe('evaluateExpr function', function() {
-  it('should throw error if left and right do not produce valid expr',
+  it('should return old result and updated false for invalid expression',
     function() {
-      expect(function() {e.evaluateExpr('4', '(45-', ')');}).to.throw();
+      expect(
+        e.evaluateExpr({'value': '45', 'updated': true}, '(45-', ')')
+      ).to.deep.equal({'value': '45', 'updated': false});
     }
   );
 
-  it('should return the value from the expression', function() {
-    expect(e.evaluateExpr('34', '(23-2*(43-3)', ')')).to.equal('-57');
+  it('should return updated result and flag from valid expression', function() {
+    expect(
+      e.evaluateExpr({'updated': false, 'value': '43'}, '(23-2*(43-3)', ')')
+    ).to.deep.equal({'value': '-57', 'updated': true});
   });
 });
