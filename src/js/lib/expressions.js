@@ -92,11 +92,7 @@ function addDecimal(left, right) {
 }
 
 function evaluateExpr(result, left, right) {
-  try {
-    result = eval(left + right);
-  } catch (e) {
-    console.error(e);
-  }
+  result = String(eval(left + right));
   return result;
 }
 
