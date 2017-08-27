@@ -53,3 +53,24 @@
     opacity: 0.2;
   }
 }
+
+.warning {
+  animation-name: warningblink;
+  animation-duration: 0.25s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes warningblink {
+  0% {
+    background-color: #fff;
+  }
+  25% {
+    background-color: darken($text-cursor-color, 10%);
+    color: #fff;
+  }
+  100% {
+    background-color: #fff;
+  }
+}
