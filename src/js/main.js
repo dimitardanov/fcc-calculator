@@ -24,6 +24,10 @@ keysHTML.addEventListener('click', function(event) {
   event.stopPropagation();
   event.preventDefault();
   var act = helpers.createActionObj(event.target);
+  calculate(act);
+});
+
+function calculate(act) {
   try {
     expression = createExpression(act, expression.left, expression.right);
     render.expression(exprLeftHTML, exprRightHTML, expression);
@@ -41,7 +45,7 @@ keysHTML.addEventListener('click', function(event) {
     resultHTML.className = 'stale';
   }
   console.log('expression: ', expression, 'result: ', result);
-});
+}
 
 function createExpression(act, exprLeft, exprRight) {
   var value = symbols[act.value] || act.value;
