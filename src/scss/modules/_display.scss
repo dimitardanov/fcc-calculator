@@ -4,13 +4,13 @@
   flex-flow: column;
   border-top: 1px solid $gray-dark;
   border-bottom: 1px solid $gray-dark;
+  color: $gray-dark;
+  background-color: #fff;
 
   p {
     margin: 0;
     padding: 0 5px;
     text-align: right;
-    color: $gray-dark;
-    background-color: #fff;
   }
 }
 
