@@ -54,6 +54,11 @@
   }
 }
 
+.stale {
+  background-color: $gray-lighter;
+  color: $gray-light;
+}
+
 .warning {
   animation-name: warningblink;
   animation-duration: 0.25s;
