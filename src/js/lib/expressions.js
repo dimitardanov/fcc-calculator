@@ -82,9 +82,12 @@ function replaceExprWithResult(result, left, right) {
 }
 
 function addDecimal(left, right) {
+  if (/(\))$|(\d*\.\d*)$/.test(left)) {
+    throw new Error('Invalid expression');
+  }
   return {
     'left': left + '.',
-    'right': ''
+    'right': right
   };
 }
 
