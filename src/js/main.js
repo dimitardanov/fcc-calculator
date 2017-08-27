@@ -15,6 +15,7 @@ var result = {
 };
 
 var keysHTML = document.querySelector('.numpad');
+var exprHTML = document.querySelector('#expr');
 var exprLeftHTML = document.querySelector('#left');
 var exprRightHTML = document.querySelector('#right');
 var resultHTML = document.querySelector('#res');
@@ -23,8 +24,15 @@ keysHTML.addEventListener('click', function(event) {
   event.stopPropagation();
   event.preventDefault();
   var act = helpers.createActionObj(event.target);
-  expression = createExpression(act, expression.left, expression.right);
-  render.expression(exprLeftHTML, exprRightHTML, expression);
+  try {
+    expression = createExpression(act, expression.left, expression.right);
+    render.expression(exprLeftHTML, exprRightHTML, expression);
+  } catch (e) {
+    exprHTML.className = 'warning';
+    setTimeout(function() {
+      exprHTML.className = '';
+    }, 250);
+  }
   result = expr.evaluateExpr(result, expression.left, expression.right);
   render.result(resultHTML, result.value);
   console.log(expression);
