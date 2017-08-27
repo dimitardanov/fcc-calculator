@@ -270,3 +270,15 @@ describe('addDecimal function', function() {
     }
   );
 });
+
+describe('evaluateExpr function', function() {
+  it('should throw error if left and right do not produce valid expr',
+    function() {
+      expect(function() {e.evaluateExpr('4', '(45-', ')');}).to.throw();
+    }
+  );
+
+  it('should return the value from the expression', function() {
+    expect(e.evaluateExpr('34', '(23-2*(43-3)', ')')).to.equal('-57');
+  });
+});
