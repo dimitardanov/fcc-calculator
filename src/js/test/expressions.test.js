@@ -94,14 +94,10 @@ describe('addOperator function', function() {
     }
   );
 
-  it('should ignore "*" and "/" at the beginning of an empty expr',
+  it('should throw error if given "*" or "/" at the beginning of an empty expr',
     function() {
-      expect(e.addOperator('*', '', '')).to.deep.equal(
-        {'left': '', 'right': ''}
-      );
-      expect(e.addOperator('/', '', '')).to.deep.equal(
-        {'left': '', 'right': ''}
-      );
+      expect(function() {e.addOperator('*', '', '');}).to.throw();
+      expect(function() {e.addOperator('/', '', '');}).to.throw();
     }
   );
 

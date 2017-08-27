@@ -40,7 +40,7 @@ function resetExpression() {
 
 function addOperator(operator, left, right) {
   if (left.length == 0 && /[\*\/]/.test(operator)) {
-    operator = '';
+    throw new Error('Invalid expression');
   } else if (/[\+\-\*\/]$/.test(left)) {
     left = left.slice(0, -1);
   }
