@@ -275,7 +275,7 @@ describe('addDecimal function', function() {
 });
 
 describe('evaluateExpr function', function() {
-  it('should return old result and updated false for invalid expression',
+  it('should return stale result and updated false for invalid expression',
     function() {
       expect(
         e.evaluateExpr({'value': '45', 'updated': true}, '(45-', ')')
