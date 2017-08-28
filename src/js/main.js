@@ -14,8 +14,11 @@ var result = {
   'updated': true
 };
 
+var offset = 20;
+
 var bodyHTML = document.querySelector('body');
 var keysHTML = document.querySelector('.numpad');
+var displayHTML = document.querySelector('.display');
 var exprHTML = document.querySelector('#expr');
 var exprLeftHTML = document.querySelector('#left');
 var exprRightHTML = document.querySelector('#right');
@@ -41,6 +44,8 @@ function calculate(act) {
   try {
     expression = createExpression(act, expression.left, expression.right);
     render.expression(exprLeftHTML, exprRightHTML, expression);
+    var width = exprLeftHTML.offsetWidth + exprRightHTML.offsetWidth + offset;
+    checkOverflow(displayHTML.offsetWidth, width, exprHTML);
   } catch (e) {
     exprHTML.className = 'warning';
     setTimeout(function() {
@@ -82,5 +87,13 @@ function createExpression(act, exprLeft, exprRight) {
       }
     default:
       throw new Error('Not implemented key handler', act);
+  }
+}
+
+function checkOverflow(containerWidth, elementWidth, element) {
+  if (containerWidth > elementWidth) {
+    element.className = '';
+  } else {
+    element.className = 'long';
   }
 }
