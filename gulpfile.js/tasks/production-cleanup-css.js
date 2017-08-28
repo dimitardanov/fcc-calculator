@@ -14,10 +14,10 @@ var paths = {
 
 function csscleanup() {
   return gulp.src(paths.src)
-  .pipe(purifycss([
-    paths.jsfiles,
-    paths.htmlfiles
-  ]))
+  // .pipe(purifycss([
+  //   paths.jsfiles,
+  //   paths.htmlfiles
+  // ]))
   .pipe(cleancss())
   .pipe(gulp.dest(paths.dest));
 }
