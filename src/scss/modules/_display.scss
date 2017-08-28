@@ -87,6 +87,20 @@
   animation-timing-function: ease-in-out;
 }
 
+.long {
+  background: linear-gradient(to right, $gray-lighter 0, #fff 30px, #fff);
+
+  &::before {
+    content: "\00AB";
+    color: $text-indicator-color;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    font-size: 0.8em;
+    line-height: 0.8em;
+  }
+}
+
 @keyframes warningblink {
   0% {
     background-color: #fff;
