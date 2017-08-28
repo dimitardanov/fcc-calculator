@@ -30,9 +30,40 @@ function matchLastNumber(expr) {
   return expr.match(regex);
 }
 
+function isKeyActionable(event) {
+  return /([\d\+\-\*\/=\(\)\.])|(Delete)|(Backspace)|(Enter)/.test(event.key);
+}
+
+function createKeyActionObj(key) {
+  var act = {'value': key};
+  if (/[\d]/.test(key)) {
+    act.type = 'number';
+  } else if (/[\+\-\*\/]/.test(key)) {
+    act.type = 'operator';
+  } else if (/[\(\)]/.test(key)) {
+    act.type = 'function';
+  } else if (/[=\.]/.test(key)) {
+    act.type = 'symbol';
+  } else if (/(Enter)/.test(key)) {
+    act.type = 'symbol';
+    act.value = '=';
+  } else if (/(Delete)/.test(key)) {
+    act.type = 'delete';
+    act.value = 'clear';
+  } else if (/(Backspace)/.test(key)) {
+    act.type = 'delete';
+    act.value = 'bsp';
+  } else {
+    throw new Error('Unhandled key: ', key);
+  }
+  return act;
+}
+
 module.exports = {
   createActionObj: createActionObj,
   reverseKeyValuePairs: reverseKeyValuePairs,
   exprReplacer: exprReplacer,
-  matchLastNumber: matchLastNumber
+  matchLastNumber: matchLastNumber,
+  isKeyActionable: isKeyActionable,
+  createKeyActionObj: createKeyActionObj
 };

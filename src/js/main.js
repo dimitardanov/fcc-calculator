@@ -14,6 +14,7 @@ var result = {
   'updated': true
 };
 
+var bodyHTML = document.querySelector('body');
 var keysHTML = document.querySelector('.numpad');
 var exprHTML = document.querySelector('#expr');
 var exprLeftHTML = document.querySelector('#left');
@@ -25,6 +26,15 @@ keysHTML.addEventListener('click', function(event) {
   event.preventDefault();
   var act = helpers.createActionObj(event.target);
   calculate(act);
+});
+
+bodyHTML.addEventListener('keypress', function(event) {
+  if (helpers.isKeyActionable(event)) {
+    event.preventDefault();
+    event.stopPropagation();
+    var act = helpers.createKeyActionObj(event.key);
+    calculate(act);
+  }
 });
 
 function calculate(act) {
