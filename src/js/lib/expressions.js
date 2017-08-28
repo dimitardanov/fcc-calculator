@@ -98,7 +98,12 @@ function addDecimal(left, right) {
 function evaluateExpr(result, left, right) {
   result.updated = true;
   try {
-    result.value = String(eval(left + right));
+    if (left == '' && right == '') {
+      result.updated = false;
+      result.value = '0';
+    } else {
+      result.value = String(eval(left + right));
+    }
   } catch (e) {
     result.updated = false;
   }

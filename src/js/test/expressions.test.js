@@ -288,4 +288,11 @@ describe('evaluateExpr function', function() {
       e.evaluateExpr({'updated': false, 'value': '43'}, '(23-2*(43-3)', ')')
     ).to.deep.equal({'value': '-57', 'updated': true});
   });
+
+  it('should return stale result of 0 for empty expression', function() {
+    var res = {'updated': true, 'value': '3'};
+    expect(e.evaluateExpr(res, '', '')).to.deep.equal(
+      {'value': '0', 'updated': false}
+    );
+  });
 });
