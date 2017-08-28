@@ -10,8 +10,27 @@
 
   p {
     margin: 0;
-    padding: 0 5px;
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  span {
+    display: inline-flex;
+    flex-shrink: 2;
+
+    &:first-child {
+      margin: 0;
+      margin-left: 5px;
+    }
+
+    &:last-child {
+      margin: 0;
+      margin-right: 5px;
+    }
   }
 }
 
@@ -29,15 +48,15 @@
 
 #res {
   @include display(50px, 1.3em);
+  padding: 0 5px;
 }
 
 #cursor {
-  display: inline-block;
-  vertical-align: text-bottom;
+  flex-shrink: 0;
   margin-left: 2px;
   margin-right: 2px;
   height: 1.2em;
-  width: 0.05em;
+  width: 1px;
   background-color: $text-cursor-color;
   animation-name: cursorblink;
   animation-duration: 0.75s;
